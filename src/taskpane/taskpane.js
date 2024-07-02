@@ -15,6 +15,7 @@ function initializeTaskPane() {
 
 function onDocumentSelectionChanged() {
   getCurrentPageDetails();
+  displayRecentPages();
 }
 
 function getCurrentPageDetails() {
