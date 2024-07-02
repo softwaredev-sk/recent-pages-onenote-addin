@@ -9,6 +9,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: white;
 }
 
 ul {
@@ -26,6 +27,7 @@ b {
 
 #recent-pages {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 h3 {
@@ -35,8 +37,49 @@ h3 {
 ul {
   list-style-type: none;
   padding: 0;
+  margin-bottom: 40px;
 }
 
 li {
+  margin-left: 2px;
   margin-bottom: 5px;
+}
+
+#recent-list li a:first-child {
+  margin: "2px 1px 2px 4px";
+  border-left: 2px solid black;
+  padding: 4px;
+  font-size: 18px;
+  text-decoration: none;
+}
+#recent-list li a:nth-child(2) {
+  font-size: 12px;
+  color: black;
+  text-decoration: none;
+}
+#recent-list li a:nth-child(2):visited {
+  text-decoration: none;
+  color: black;
+}
+#recent-list li a:nth-child(2):hover {
+  color: blue;
+}
+
+#recent-list {
+  margin-bottom: 40px;
+}
+
+.path {
+  margin: 1px 0 1px 20px;
+  padding-left: 4px;
+  font-size: 14px;
+}
+
+.footer {
+  /* position: fixed;
+  bottom: 2px; */
+  padding: 5px;
+  margin: 4px 0;
+  background-color: black;
+  color: white;
 }

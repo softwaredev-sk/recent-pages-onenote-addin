@@ -74,7 +74,7 @@
       <bt:ShortStrings>
         <bt:String id="GetStarted.Title" DefaultValue="See recently visited pages!"/>
         <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show recent pages"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Recent Pages"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="GetStarted.Description" DefaultValue="Your add-in loaded succesfully. Go to the HOME tab and click the 'Show recent pages' button to get started."/>

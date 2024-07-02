@@ -19,10 +19,9 @@ function onDocumentSelectionChanged() {
 }
 
 function getCurrentPageDetails() {
-  let theNoblePath = "";
   OneNote.run(function (context) {
     var page = context.application.getActivePage();
-    page.load("title, clientUrl, pageLevel, parentSection");
+    page.load("title, clientUrl, webUrl, parentSection");
     return context.sync().then(function () {
       var section = page.parentSection;
       section.load("name, notebook");
@@ -34,7 +33,7 @@ function getCurrentPageDetails() {
           document.getElementById("breadcrumb").innerText = breadcrumb;
 
           // Track the current page as a recent page
-          trackRecentPage(page.id, page.title, page.clientUrl, section.name, notebook.name);
+          trackRecentPage(page.id, page.title, page.clientUrl, page.webUrl, section.name, notebook.name);
         });
       });
     });
@@ -43,7 +42,7 @@ function getCurrentPageDetails() {
   });
 }
 
-function trackRecentPage(pageId, pageTitle, clientUrl, sectionName, notebookName) {
+function trackRecentPage(pageId, pageTitle, clientUrl, webUrl, sectionName, notebookName) {
   let recentPages = JSON.parse(localStorage.getItem("recentPages")) || [];
 
   // Remove the page if it's already in the list to update its position
@@ -55,6 +54,7 @@ function trackRecentPage(pageId, pageTitle, clientUrl, sectionName, notebookName
     id: pageId,
     title: pageTitle,
     url: clientUrl,
+    wUrl: webUrl,
     section: sectionName,
     notebook: notebookName,
   });
@@ -72,9 +72,24 @@ function displayRecentPages() {
 
   recentPages.forEach((page) => {
     let li = document.createElement("li");
-    li.innerHTML = `<a href="${page.url}" style="margin: '2px 1px 2px 4px'; border-left: 2px solid black; padding: 2px; font-size: 16px">${page.title}</a>
-    <div style="margin-left: 15px; font-size: 12px">${page.notebook} >${page.sectionGroup} > ${page.section}</div>`;
+    li.innerHTML = `<a href="${page.wUrl}" target="_blank">${page.title}</a><a href="${page.url}">(Open in Desktop App)</a>
+    <p class="path">${page.notebook} > ${page.section}</p>`;
 
     recentList.appendChild(li);
   });
+}
+
+if (window.parent === window) {
+  console.log("%c Note!", "font-weight: bold; font-size: 30px;color: red;");
+  console.log(
+    "%c This console log is a reminder that this page is hosted for onenote addin that can be sideloaded to your onenote app using manifest.xml available in this repository. The page looks empty but it works for OneNote Web",
+    "font-weight: bold; font-size: 18px; margin-bottom: 12px"
+  );
+  console.log(
+    "%c OneNote (Web) > Insert > Office Add-ins > Upload My Add-in > select manifest.xml and upload.",
+    "font-weight: bold; font-size: 24px;color: yellow;"
+  );
+
+  document.querySelector(".note").textContent =
+    "This page is hosted for onenote addin that can be sideloaded to your onenote app using manifest.xml available in this repository. The page looks empty but it works for OneNote Web.";
 }
