@@ -1,0 +1,6 @@
+node_modules
+.vscode
+dist
+.eslintrc.json
+package-lock.json
+setup.iss
