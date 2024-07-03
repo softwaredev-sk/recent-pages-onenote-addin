@@ -92,4 +92,9 @@ if (window.parent === window) {
 
   document.querySelector(".note").textContent =
     "This page is hosted for onenote addin that can be sideloaded to your onenote app using manifest.xml available in this repository. The page looks empty but it works for OneNote Web.";
+  document.querySelector(".note").appendChild(document.createElement("br"));
+  const seeDocs = document.createElement("a");
+  seeDocs.href = "../../index.html";
+  seeDocs.textContent = "See Docs";
+  document.querySelector(".note").appendChild(seeDocs);
 }

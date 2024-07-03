@@ -75,11 +75,15 @@ li {
   font-size: 14px;
 }
 
-.footer {
+.sticky-topnote {
   /* position: fixed;
   bottom: 2px; */
   padding: 5px;
   margin: 4px 0;
   background-color: black;
   color: white;
+}
+
+.note {
+  text-align: center;
 }
