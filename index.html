@@ -4,7 +4,7 @@
   <head>
     <!-- <meta http-equiv="refresh" content="0; url=src/taskpane/taskpane.html" /> -->
     <title>Recent Pages OneNote Addin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="assets/icon-32.png" type="image/x-icon" />
     <style>
       html,
@@ -40,7 +40,11 @@
       }
 
       .instructions span {
+        display: block;
         margin-left: 40px;
+        margin-bottom: 5px;
+        border-left: 1px solid black;
+        padding-left: 5px;
       }
 
       .addon-info img {
@@ -56,6 +60,27 @@
       .addon-info {
         margin-top: 10px;
       }
+      pre {
+        margin-left: 20px;
+        padding-left: 10px;
+        border-left: 1px solid #000;
+      }
+      .recommendedDownloadBtn{
+        position: relative;
+        padding: 8px 15px;
+        margin: 0 8px;
+        transition: transform 300ms;
+        transform-origin: center;
+      }
+
+      .recommendedDownloadBtnStart {
+        transform: scale(1.3);
+      }
+      .recommendedDownloadBtnEnd{
+        transform: scale(1);
+      }
+
+
     </style>
   </head>
   <body>
@@ -67,19 +92,20 @@
         clicking on Download XML button below, and/or by clicking save link as option from context menu (opened usually
         from secondary click, which is right click for most users).
       </p>
-      <button class="recommendedDownloadBtn">Download XML (Recommended)</button>
-      <a href="manifest.xml" target="_blank" download>Save manifest.xml</a>
+      <div class="btnContainer">
+        <button class="recommendedDownloadBtn">Download XML (Recommended)</button>
+        <a href="manifest.xml" target="_blank" download>Save manifest.xml</a>
+      </div>
       <br />
       <p>
         <b>Note:</b> The hierarchy doesn't check for notebook group, section group or page levels. The page structure
-        shown is <pre>| Parent Notebook > Parent Section > Page</pre>
+        shown is <pre>Parent Notebook > Parent Section > Page</pre>
       </p>
       <div class="addon-info">
         <div class="instructions">
           <h2>How to sideload Addon?</h2>
-          <span
-            >Open OneNote for Web > Insert > Office Add-ins > Upload My Add-in > select manifest.xml and upload.</span
-          >
+          <span>Open OneNote for Web > Insert > Office Add-ins > Upload My Add-in > browse and select manifest.xml > click upload.</span>
+          <span>Go To 'Home' Tab > Click 'Show Recent Pages', and it will show the taskpane for recently visited pages alongwith the current page on top.</span>
         </div>
         <img src="assets/Screenshot-steps.png" />
         <img src="assets/screenshot.png" />
@@ -105,6 +131,28 @@
           downloadBtn.textContent = defaultText;
         }, 1000);
       });
+
+      downloadBtn.addEventListener('mouseleave', ()=>{
+        downloadBtn.style.scale = 1;
+      })
+      downloadBtn.addEventListener('mouseover', ()=>{
+        downloadBtn.style.transition = 'scale 100ms';
+        downloadBtn.style.scale = 1.1;
+        setTimeout(()=>{
+          downloadBtn.style.scale = 1.05;
+        },100)
+      })
+
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  setTimeout(()=>{
+    downloadBtn.classList.add('recommendedDownloadBtnStart');
+    setTimeout(()=>{
+      downloadBtn.classList.remove('recommendedDownloadBtnStart');
+      downloadBtn.classList.add('recommendedDownloadBtnEnd');
+  }, 200);
+},10);
+});
     </script>
   </body>
 </html>
